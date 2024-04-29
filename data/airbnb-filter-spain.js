@@ -21,5 +21,5 @@
 
 })()
 
-// Porcentaje de plazas que tienen los Españoles y los estrangeros, con redux
+// Porcentaje de plazas que tienen los Españoles y los extranjeros, con redux
 

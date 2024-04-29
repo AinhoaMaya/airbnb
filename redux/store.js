@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit'
-import cartReducer from './percentage-places'
+import percentageReducer from './percentage-places'
 
 export const store = configureStore({
   reducer: {
-    percentage: cartReducer
+    percentage: percentageReducer
   }
 })
 
