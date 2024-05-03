@@ -48,7 +48,20 @@
   console.log(licenses)
 
 
-  // 1.3 Y busca por cada licencia de propiedad quién es su explotador (penúltimo dato de cada registro)
+  // 1.3 Y busca por cada licencia de propiedad quién es su explotador
+  const propertyManagers = locations.map(property => {
+    return {
+      license: property.license,
+      hostName: property.host_name,
+      hostId: property.host_id
+    };
+  });
+
+  console.log(propertyManagers);
+
+
+
+
 
   // 3º Adjunta el nombre del explotador a el conjunto de datos que has escrito en el punto 1
 })()

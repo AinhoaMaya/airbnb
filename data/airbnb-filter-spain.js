@@ -23,9 +23,9 @@
 
 // Devolver los datos que contengan "Spain" con un filter
 
-  const filterSpain = locations.filter(location => location.hostLocation && location.hostLocation.includes('Spain'));
+  // const filterSpain = locations.filter(location => location.hostLocation && location.hostLocation.includes('Spain'));
 
-  return filterSpain;
+  // return filterSpain;
 
 
 // Devolver los datos que no contengan "Spain" con un filter
