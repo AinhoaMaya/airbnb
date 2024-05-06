@@ -5,8 +5,11 @@
   const file = await fs.readFile('../data/airbnb-owner-ranking-last-year.json', 'utf-8')
   const locations = JSON.parse(file)
 
-  const files = await fs.readFile('../data/property-transmissions.json', 'utf-8')
-  const property = JSON.parse(files)
+  const secondFile = await fs.readFile('../data/property-transmissions.json', 'utf-8')
+  const property = JSON.parse(secondFile)
+
+  const thirdFile = await fs.readFile('../data/population.json', 'utf-8')
+  const population = JSON.parse(thirdFile)
 
 
   // Devolver los datos que contengan "Spain" con un bucle
@@ -148,33 +151,57 @@
 
   // Otro ejemplo de Recorrer el array, y crear un objeto donde cada una de las claves sea la fecha y hacer la suma total de los valores de los años con "reduce"
 
-  const dataProperty = properties => {
-    // Utilizamos reduce para acumular los resultados en un objeto
-    const resultado = properties.alaior.reduce((acc, property) => {
-      const year = property.date.split('-')[0]; // Extraemos el año de la fecha
-      const value = parseInt(property.value, 10); // Convertimos el valor a número
+  // const dataProperty = properties => {
+  //   // Utilizamos reduce para acumular los resultados en un objeto
+  //   const resultado = properties.alaior.reduce((acc, property) => {
+  //     const year = property.date.split('-')[0]; // Extraemos el año de la fecha
+  //     const value = parseInt(property.value, 10); // Convertimos el valor a número
 
-      // Inicializamos el año en el acumulador si no existe aún
-      if (!acc[year]) {
-          acc[year] = 0;
+  //     // Inicializamos el año en el acumulador si no existe aún
+  //     if (!acc[year]) {
+  //         acc[year] = 0;
+  //     }
+
+  //     acc[year] += value; // Sumamos el valor al total del año correspondiente
+  //     return acc; // Retornamos el acumulador actualizado para la siguiente iteración
+  //   }, {}); // El objeto vacío {} es el valor inicial del acumulador acc
+
+  //   return { alaior: resultado };
+  // };
+
+  // const resultadoFinal = dataProperty(property);
+  // console.log(resultadoFinal);
+
+  // // Crear un nuevo json a partir de los resultados
+  // try {
+  //   await fs.writeFile('../data/result-years.json', JSON.stringify(resultadoFinal, null, 2), 'utf8');
+  //   console.log("El archivo JSON fue guardado correctamente.");
+  // } catch (error) {
+  //   console.error("Error al escribir el archivo JSON:", error);
+  // }
+
+  // Transforma el json "population" a un objeto como este (quita los acentos a las poblaciones, pon su nombre en minúscula y si hay espacios sustituyelos por guiones)
+
+  const result = {};
+
+  Object.entries(population).forEach(([key, value]) => {
+    const towns = key.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().split(' ').slice(1).join('-');
+    console.log(towns)
+    // console.log(year)
+
+    // townArray.shift() // eliminar el 1º elemento del array, si no hubiera usado "slice(1)"
+
+    Object.entries(value).forEach(([origin, years]) => {
+      if (!population[town]) {
+        population[town] = {}
       }
 
-      acc[year] += value; // Sumamos el valor al total del año correspondiente
-      return acc; // Retornamos el acumulador actualizado para la siguiente iteración
-    }, {}); // El objeto vacío {} es el valor inicial del acumulador acc
-
-    return { alaior: resultado };
-  };
-
-  const resultadoFinal = dataProperty(property);
-  console.log(resultadoFinal);
-
-  // Crear un nuevo json a partir de los resultados
-  try {
-    await fs.writeFile('../data/result-years.json', JSON.stringify(resultadoFinal, null, 2), 'utf8');
-    console.log("El archivo JSON fue guardado correctamente.");
-  } catch (error) {
-    console.error("Error al escribir el archivo JSON:", error);
-  }
-
+      if(origin === 'Nascut a les Illes Balears') {
+        population[town]['balear'] = years
+      } else if(origin === 'Nascut en una altra CA') {
+        
+      }
+    }
+    
+  });
 })()
