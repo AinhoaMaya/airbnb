@@ -185,11 +185,12 @@
   const result = {};
 
   Object.entries(population).forEach(([key, value]) => {
-    const towns = key.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().split(' ').slice(1).join('-');
+    const towns = key.normalize("NFD").replace(/[\u0300-\u036f]/g, "").split(' ');
     console.log(towns)
     // console.log(year)
 
-    // townArray.shift() // eliminar el 1º elemento del array, si no hubiera usado "slice(1)"
+    townArray.shift() // eliminar el 1º elemento del array. También se puede usar "slice(1)" en su lugar
+    const town = townArray.join('-').toLowerCase()
 
     Object.entries(value).forEach(([origin, years]) => {
       if (!population[town]) {
@@ -199,9 +200,10 @@
       if(origin === 'Nascut a les Illes Balears') {
         population[town]['balear'] = years
       } else if(origin === 'Nascut en una altra CA') {
-        
+        population[town]['provice'] = years
+      } else if(origin === 'Nascuts a l\'estranger') {
+        population[town]['foreign'] = years
       }
-    }
-    
-  });
+    })
+  })
 })()
