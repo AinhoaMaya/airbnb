@@ -52,4 +52,10 @@
   }, {})
 
   console.log(foreignOwnerByCountry)
+
+  
+  // Ordenar por hostLocation
+  const ownerBedRankings = data.sort((a, b) => a.hostLocation.localeCompare(b.hostLocation))
+
+  console.log(ownerBedRankings)
 })()
