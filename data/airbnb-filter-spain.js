@@ -114,6 +114,40 @@
   //   console.log(error)
   // }
 
+  // Recorrer el array, y crear un objeto donde cada una de las claves sea la fecha y hacer la suma total de los valores de los años con "reduce" y object.entries
+
+  // const fs = require('fs/promises')
+
+  // try {
+    
+  //   const file = await fs.readFile('../data/property-transmissions.json', 'utf-8')
+  //   const data = JSON.parse(file)
+  //   const towns = {}
+
+  //   Object.entries(data).forEach(([key, value]) => {
+  //     const years = value.reduce((acc, element) => {
+  //       const year = element.date.split('-')[0]
+        
+  //       if (!acc[year]) {
+  //         acc[year] = parseFloat(element.value)
+  //       }else{
+  //         acc[year] += parseFloat(element.value)
+  //       }
+
+  //       return acc
+  //     }, {})
+
+  //     towns[key] = years
+  //   })
+    
+  //   fs.writeFile('../data/property-transmissions-by-year.json', JSON.stringify(towns, null, 2))
+
+  // } catch (error) {
+  //   console.log(error)
+  // }
+
+  // Otro ejemplo de Recorrer el array, y crear un objeto donde cada una de las claves sea la fecha y hacer la suma total de los valores de los años con "reduce"
+
   const dataProperty = properties => {
     // Utilizamos reduce para acumular los resultados en un objeto
     const resultado = properties.alaior.reduce((acc, property) => {
